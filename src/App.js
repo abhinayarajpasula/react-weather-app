@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 
+import Graph from "./Graph";
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -7,7 +9,7 @@ class App extends Component {
     this.state = {
       location: "",
       data: {},
-      date: [],
+      dates: [],
       temps: []
     };
     this.changeLocation = this.changeLocation.bind(this);
@@ -75,6 +77,14 @@ class App extends Component {
           </label>
         </form>
         <p>{currentTemp}</p>
+        {this.state.data.list ? (
+          <div>
+            <h3>Forecast</h3>
+            <Graph xData={this.state.dates} yData={this.state.temps} />{" "}
+          </div>
+        ) : (
+          ""
+        )}
       </div>
     );
   }
