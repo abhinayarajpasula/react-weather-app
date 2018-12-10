@@ -3,10 +3,12 @@ import React, { Component } from "react";
 class App extends Component {
   constructor(props) {
     super(props);
-
+    //initializing the state after loading the page
     this.state = {
       location: "",
-      data: {}
+      data: {},
+      date: [],
+      temps: []
     };
     this.changeLocation = this.changeLocation.bind(this);
     this.fetchData = this.fetchData.bind(this);
@@ -27,10 +29,23 @@ class App extends Component {
       process.env.REACT_APP_API_ID
     }&units=metric`;
 
+    const dates = [];
+    const temps = [];
     fetch(url)
       .then(response => response.json())
-      .then(data => this.setState({ data: data }))
-      .catch(error => console.log("Request failed for some reason"));
+      .then(data => {
+        const list = data.list;
+        for (let i = 0; i < list.length; i++) {
+          dates.push(list[i].dt_txt);
+          temps.push(list[i].main.temp);
+        }
+
+        this.setState({
+          data,
+          dates,
+          temps
+        });
+      });
   }
 
   changeLocation(e) {
