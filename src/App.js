@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 
 import Graph from "./Graph";
+import "./App.css";
 
 class App extends Component {
   constructor(props) {
@@ -95,9 +96,11 @@ class App extends Component {
       currentTemp = this.state.data.list[0].main.temp;
     }
     return (
-      <div>
+      <div className="wrapper">
         <h1>Weather Report</h1>
-        <h3>Our app provides city based forecast for next 5days</h3>
+        <p className="description">
+          Our app provides city based forecast for next 5days
+        </p>
         <form onSubmit={this.fetchData}>
           <label>
             Please enter the city name
@@ -109,26 +112,34 @@ class App extends Component {
             />
           </label>
         </form>
-        {this.state.selected.temp === null ? (
-          <span>{currentTemp}</span>
-        ) : (
-          <span>{this.state.selected.temp}</span>
-        )}
-        {currentTemp !== "Specify a location" ? <span> &deg;C</span> : null}
-        {this.state.selected.temp !== null ? (
-          <p>{this.state.selected.date}</p>
-        ) : null}
-
+        <div className="temp-data">
+          {currentTemp !== undefined ? (
+            <span>
+              <span>Current temperature of the day: &nbsp;</span>
+              <span className="color-adjust">{currentTemp}</span>
+              <span> &deg;C</span>
+            </span>
+          ) : null}
+          {this.state.selected.temp !== null ? (
+            <p className="selected-temp">
+              {`Selected Temperature: ${this.state.selected.temp}`}
+              <span> &deg;C</span>
+            </p>
+          ) : null}
+          {this.state.selected.temp !== null ? (
+            <p className="selected-date">{`${this.state.selected.date}`}</p>
+          ) : null}
+        </div>
         {this.state.data.list ? (
-          <Graph
-            xData={this.state.dates}
-            yData={this.state.temps}
-            onPlotClick={this.onPlotClick}
-            // onPlotHover={this.onPlotHover}
-          />
-        ) : (
-          ""
-        )}
+          <div className="graph-wrapper">
+            <Graph
+              xData={this.state.dates}
+              yData={this.state.temps}
+              isResponsive={true}
+              onPlotClick={this.onPlotClick}
+            />
+          </div>
+        ) : null}
       </div>
     );
   }

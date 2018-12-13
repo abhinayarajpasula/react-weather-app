@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import Plot from "react-plotly.js";
 import propTypes from "prop-types";
 import isEqual from "lodash.isequal";
+import Plot from "react-plotly.js";
 
 class Graph extends Component {
   shouldComponentUpdate(nextProps) {
@@ -14,12 +14,10 @@ class Graph extends Component {
 
   componentDidMount() {
     console.log("Graph component mounted");
-    // console.log("componentDidMount", this);
   }
 
   componentDidUpdate() {
     console.log("Graph component updated");
-    // console.log("componentDidUpdate", this);
   }
 
   render() {
@@ -27,21 +25,32 @@ class Graph extends Component {
         {
           x: this.props.xData,
           y: this.props.yData,
-          marker: { color: "red" }
+          type: "scatter",
+          marker: { color: "#D83F87" }
         }
       ],
       config = { displayModeBar: false };
-
     return (
-      <React.Fragment>
-        <h3>Forecast</h3>
-        <Plot
-          data={data}
-          config={config}
-          onClick={this.props.onPlotClick}
-          // onPlotHover={this.props.onPlotHover}
-        />
-      </React.Fragment>
+      <Plot
+        data={data}
+        config={config}
+        useResizeHandler={this.props.isResponsive}
+        onClick={this.props.onPlotClick}
+        style={{ width: "100%", height: "100%" }}
+        layout={{
+          autosize: true,
+          plot_bgcolor: "#4B0082",
+          paper_bgcolor: "#4B0082",
+          margin: {
+            t: 0,
+            r: 50,
+            l: 50
+          },
+          font: {
+            color: "#FFF"
+          }
+        }}
+      />
     );
   }
 }
@@ -49,6 +58,7 @@ class Graph extends Component {
 Graph.propTypes = {
   xData: propTypes.array.isRequired,
   yData: propTypes.array.isRequired,
+  isResponsive: propTypes.bool,
   onPlotClick: propTypes.func.isRequired
 };
 

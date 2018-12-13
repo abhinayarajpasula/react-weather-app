@@ -1,0 +1,88 @@
+@import url('https://fonts.googleapis.com/css?family=Josefin+Sans');
+@import url('https://fonts.googleapis.com/css?family=Lato');
+
+*{
+    margin:0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Lato', sans-serif;
+}
+
+.wrapper {
+    width: 80%;
+    background-color: #4b0082;
+}
+
+h1 {
+    color: #D83F87;
+    text-align: center;
+    margin-top: 50px;
+    margin-bottom: 10px;
+    font-family: 'Josefin Sans', sans-serif;
+}
+
+p.description {
+    color: #ffffff;
+    font-weight: 400;
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 1.2em;
+}
+
+form {
+    text-align: center;
+    color: #eeeeee;
+    margin-bottom: 20px;
+}
+
+input[type=text] {
+    border: 0;
+    outline: 0;
+    background: transparent;
+    border-bottom: 3px solid #D83F87;
+    color: #eeeeee;
+    margin-left: 10px;
+    font-family: 'Lato', sans-serif;
+    font-size: .9rem;
+    font-weight: 300;
+}
+
+input::placeholder {
+    color: #bbb;
+    font-family: 'Lato', sans-serif;
+  }
+
+  .temp-data {
+    color: #eeeeee;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.graph-wrapper {
+    background-color: #4b0082;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.selected-temp {
+    margin-top: 10px;
+    color: #bbbbbb;
+}
+
+.selected-date {
+    margin-top: 5px;
+    color: #bbbbbb;
+}
+
+.color-adjust {
+    color: #D83F87;
+    font-weight: 600;
+}
+
+@media only screen and (max-width: 600px) {
+    .wrapper {
+        width: 100%;
+    }
+}
